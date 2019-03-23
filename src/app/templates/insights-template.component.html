@@ -1,0 +1,9 @@
+<chart #chart style="width: 500px; height: 500px; background-color:white;" [type]="type" [data]="data"
+    [options]="options"></chart>
+<button  class="download-chart-button" style="width: 150px" exportEnabled="true"
+mat-raised-button  (click)="onClick()">
+<a download style="text-decoration: none; color: white;" [href]="dataUrl">
+    <mat-icon aria-label="download">cloud_download</mat-icon>
+</a>
+</button>
+<br>

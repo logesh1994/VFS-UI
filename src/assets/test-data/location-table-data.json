@@ -1,0 +1,22 @@
+﻿{
+  "tableName": "Location",
+  "columnNames": [
+    "id",
+    "city",
+    "country"
+  ],
+  "data": [
+    {
+      "id": "1",
+      "city": "Coimbatore",
+      "state": "TamilNadu",
+      "country": "India"
+    },
+    {
+      "id": "2",
+      "city": "Chennai",
+      "state": "TamilNadu",
+      "country": "India"
+    }
+  ]
+}

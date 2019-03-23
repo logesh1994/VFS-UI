@@ -1,0 +1,80 @@
+/* import url */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+header {
+  /* background: rgb(3, 154, 255); */
+  background: #0033a0;
+  position: sticky;
+}
+
+/* body {
+  font-family: "proxima-nova","Helvetica Neue","Helvetica","Roboto","Arial","sans-serif";
+} */
+
+header img {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.logo {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  font-size: 36px;
+  padding-left: 100px;
+}
+
+/* .logout {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  float: right;
+  padding-right: 100px;
+  cursor: pointer;
+} */
+
+.nav-list {
+  list-style-type: none;
+  /* disbaled the Uppercase transformation */
+  /* text-transform: uppercase; */
+  color: black;
+}
+
+.nav-list a {
+  text-decoration: none;
+  font-size: 20px;
+  padding: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  color: black;
+}
+
+.nav-list a:hover {
+  /* background: rgb(3, 154, 255); */
+  background: #0033a0;
+  color: white;
+}
+
+.menu-icon{
+  color: white;
+  font-size: 50px;
+  float: right;
+  padding-right: 30px;
+  /* padding-top: 0.70%; */
+  padding-top: 10px;
+  cursor: pointer;
+  transition: transform .5s cubic-bezier(.77, .2, .05, 1),opacity .5s ease;
+}
+
+*{
+  font-family: "proxima-nova","Helvetica Neue","Helvetica","Roboto","Arial","sans-serif";
+}
+
+.grid-container {
+  display: grid;
+  grid-column: auto auto auto;
+}
+
+.main-app-content {
+  height: 560px;
+}

@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{dialogTitle}}</h1>
+<p>{{dialogDescription}}</p>
+<form [formGroup]="data_form">
+  <ng-container *ngFor="let column of displayedColumns">
+    <mat-form-field appearance="outline">
+      <mat-label>{{column}}</mat-label>
+      <ng-container>
+      <input matInput placeholder={{column}} formControlName={{column}}>
+    </ng-container>
+    </mat-form-field>
+    &nbsp;
+  </ng-container>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">No Thanks</button>
+    <button mat-raised-button (click)="processEnteredData()" [disabled]="disableSave()">{{confirmbuttonName}}</button>
+    <ng-container>
+    </ng-container>
+  </div>
+</form>

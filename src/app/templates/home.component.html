@@ -1,0 +1,20 @@
+<button mat-raised-button (click)="openUploadDialog()"> Upload Data</button>
+
+<h1>Users Data</h1>
+<div>
+    <ng-container *ngIf="errorMessage"></ng-container>
+    <h2>{{errorMessage}}</h2>
+</div>
+<ul *ngIf="users">
+    <li *ngFor="let user of users.data">
+        <img [src]="user.avatar">
+        <p>{{ user.first_name }} {{ user.last_name }}</p>
+    </li>
+</ul>
+
+<app-insights [type]="chart1.type" [data]="chart1.data" [options]="chart1.options"></app-insights>
+<br>
+<app-insights [type]="chart2.type" [data]="chart2.data" [options]="chart2.options"></app-insights>
+<br>
+<app-insights [type]="chart3.type" [data]="chart3.data" [options]="chart3.options"></app-insights>
+<br><br><br><br>

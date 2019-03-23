@@ -1,0 +1,14 @@
+/* .tabs {
+    background-color: lightgray !important;
+    color: #00b140 !important;
+} */
+
+.mat-tab-label {
+    background-color: lightgray;
+    color: #00b140;
+}
+
+.mat-tab-label.mat-tab-label-active {
+    background-color: transparent !important;
+    color: #0033a0;
+}

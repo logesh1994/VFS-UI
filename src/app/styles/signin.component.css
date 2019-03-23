@@ -1,0 +1,28 @@
+.contents {
+    text-align: center;
+    background: rgba(235, 221, 221, 0.37);
+}
+
+.card {
+    width: 70%;
+    padding-top: 25%; 
+    padding-left: 15%; 
+    padding-bottom: 25%;
+}
+
+.field {
+    width: 80%;
+}
+
+.slide {
+    float: left;
+    width: 49%;
+}
+
+.login {
+    width: 50%;
+    float: right;
+    /* background-image: url("/assets/184.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat; */
+}

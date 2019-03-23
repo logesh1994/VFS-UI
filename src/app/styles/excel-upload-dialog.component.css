@@ -1,0 +1,11 @@
+.choose-file-button {
+  padding: 5px;
+  color: white;
+  background-color: #009578;
+  cursor: pointer;
+  box-shadow: 5px 5px lightgray;
+}
+
+.choose-file-button:hover {
+    background-color: #00b28f;
+}

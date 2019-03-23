@@ -1,0 +1,37 @@
+<h1>{{event_name}}</h1>
+<form [formGroup]="feedback_ur_form">
+  <mat-form-field style="width:50% !important;" appearance="outline">
+    <mat-label>Employee Id</mat-label>
+    <input matInput placeholder="Cognizant Id" formControlName="employee_id" [errorStateMatcher]="errorMatcher">
+    <mat-error
+    *ngIf="feedback_ur_form.get('employee_id').errors && feedback_ur_form.get('employee_id').errors.required">
+    Employee field should not be Empty
+  </mat-error>
+  <mat-error
+    *ngIf="feedback_ur_form.get('employee_id').errors && feedback_ur_form.get('employee_id').errors.invalidEmployeeId">
+    Please enter a valid Employee Id
+  </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field style="width:50% !important;" appearance="outline">
+    <mat-label>Please select a reason for Not attending</mat-label>
+    <mat-select placeholder="Reason" formControlName="reason">
+      <mat-option>Select reason</mat-option>
+      <mat-option *ngFor="let selected_reason of reason_list" [value]="selected_reason">{{selected_reason}}</mat-option>
+    </mat-select>
+    <mat-error
+      *ngIf="feedback_ur_form.get('reason').errors && feedback_ur_form.get('reason').errors.required">
+      Please enter a valid Employee Id
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field style="width:50% !important;" appearance="outline">
+    <mat-label>Additional Comments</mat-label>
+    <textarea rows="6" matInput placeholder="Additional Comments if any..." formControlName="comments"></textarea>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button class="custom-button-green" (click)="submitFeedback()">Submit Feedback</button>
+  &nbsp;
+  <button mat-raised-button class="custom-button-gray" (click)="resetForm()">Reset</button>
+  <br><br><br><br>
+</form>

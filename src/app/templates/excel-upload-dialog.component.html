@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Upload Excel File</h1>
+<div mat-dialog-content style="width:400px !important">
+  <p>Please upload a valid Excel File ...</p>
+  <input placeholder="Upload file" type="file" (change)="processFile($event)"
+    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+    #uploadFile hidden />
+  <button mat-raised-button class="choose-file-button" (click)="uploadFile.click()">Choose a file</button>
+  <mat-form-field style="padding-left:20px !important">
+    <input matInput placeholder="Selected File Name" disabled [value]="uploadedFilePath ? uploadedFilePath : ''">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onSubmitClick($event)">Submit</button>
+  <button mat-raised-button style="background-color: lightskyblue" (click)="export()">Export Excel</button>
+</div>
+
+<!-- (change)="processFile($event)" -->

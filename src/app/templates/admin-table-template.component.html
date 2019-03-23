@@ -1,0 +1,51 @@
+<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+<section class="table-section">
+  <div style="padding-bottom: 20px !important"></div>
+  <button mat-raised-button class="custom-button-green" (click)="onAddClick()"> Add Row </button>
+  &nbsp;
+  <button mat-raised-button class="custom-button-green" (click)="exportData()"> Export Data </button>
+  &nbsp;
+  <button mat-raised-button class="custom-button-green" (click)="exportTemplateData()"> Export Template </button>
+  &nbsp;
+  <button mat-raised-button class="custom-button-green" (click)="openUploadDialog()"> Upload Data</button>
+  <div style="padding-bottom: 20px !important"></div>
+  
+  <form [formGroup]="filter_form">
+    <ng-container *ngFor="let column of displayedColumns">
+      <mat-form-field appearance="outline" style="width: auto">
+        <mat-label>{{column}}</mat-label>
+        <ng-container>
+          <input matInput placeholder={{column}} formControlName={{column}} (keyup)="eventCheck($event, column)">
+        </ng-container>
+      </mat-form-field>
+      &nbsp;
+    </ng-container>
+  </form>
+  
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"
+    style="width: 100%;border-collapse: collapse;">
+    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumnsWithActions" [sticky]="column.includes('Id')"
+      [stickyEnd]="column == 'actions'">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="background-color: lightblue;
+       border-right: 1px solid #e0e0e0; font-size: 15px;
+       font-weight: bold; padding-left: 10px"> {{column}} </th>
+      <td mat-cell style="padding-left: 10px; padding-right: 10px; border-right: 1px solid #e0e0e0;"
+        *matCellDef="let element">
+        {{element[column]}}
+        <ng-container *ngIf="column == 'actions'">
+          <button mat-icon-button color="primary" (click)="onEditClick(element)" class="ripple" #editIcon>
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="onDeleteClick(element)" class="ripple">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+        </ng-container>
+      </td>
+    </ng-container>
+    <!-- If height is reduced then the sticky header works -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsWithActions; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsWithActions"></tr>
+  </table>
+  <mat-paginator #scheduledOrdersPaginator [pageSizeOptions]="[25, 50]"></mat-paginator>
+</section>
+<!-- after clicking any button the focus stays, its for keyboard accesability purpose -->

@@ -1,0 +1,24 @@
+<form [formGroup]="service_check_form" (ngSubmit)="checkService()">
+  <mat-form-field appearance="outline">
+    <mat-select placeholder="Get/Post" formControlName="request_type">
+      <mat-option value="Get">Get</mat-option>
+      <mat-option value="Post">Post</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width:60% !important; padding-left: 3%; padding-right: 3%" appearance="outline">
+    <mat-label>URL</mat-label>
+    <input matInput placeholder="Type in URL ..." formControlName="url">
+  </mat-form-field>
+  <button mat-raised-button class="custom-button-green">Check Service</button>
+  <br>
+  <mat-form-field style="width:30% !important; padding-left: 10px;" appearance="outline">
+    <mat-label>Request</mat-label>
+    <textarea rows="20" matInput placeholder="Request Data" formControlName="request"></textarea>
+  </mat-form-field>
+  <mat-form-field style="width:60% !important; padding-left: 10px;" appearance="outline">
+    <mat-label>Response</mat-label>
+    <textarea rows="20" matInput placeholder="Response Data" formControlName="response">{{response}}</textarea>
+  </mat-form-field>
+</form>
+<button mat-raised-button class="custom-button-gray" (click)="resetForm()">Reset</button>
+<br><br>

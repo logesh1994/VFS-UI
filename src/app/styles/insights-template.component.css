@@ -1,0 +1,14 @@
+.download-chart-button {
+    /* padding: 5px; */
+    height: 30px;
+    max-width: 5px !important;
+    color: white;
+    background-color: #009578;
+    cursor: pointer;
+    box-shadow: 5px 5px lightgray;
+    text-decoration: none;
+  }
+  
+  .download-chart-button:hover {
+      background-color: #00b28f;
+  }

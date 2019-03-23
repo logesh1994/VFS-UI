@@ -1,0 +1,59 @@
+<h1>{{displayMessage}}</h1>
+<form [formGroup]="feedback_rpa_form">
+  <mat-form-field style="width:50% !important;" appearance="outline">
+    <mat-label>Employee Id</mat-label>
+    <input matInput placeholder="Cognizant Id" formControlName="employee_id" [errorStateMatcher]="errorMatcher">
+    <mat-error
+      *ngIf="feedback_rpa_form.get('employee_id').errors && feedback_rpa_form.get('employee_id').errors.required">
+      Employee field should not be Empty
+    </mat-error>
+    <mat-error
+      *ngIf="feedback_rpa_form.get('employee_id').errors && feedback_rpa_form.get('employee_id').errors.invalidEmployeeId">
+      Please enter a valid Employee Id
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <p>Please select your feedback</p>
+  <mat-grid-list cols="4" rowHeight="130px">
+    <mat-grid-tile colspan="3" rowspan="1">
+      <img src="../../assets/rating-emoji.png" alt="rating-smiley" usemap="#ratingmap">
+      <map name="ratingmap">
+        <area shape="rect" coords="0,0,130,130" alt="rating-1" (click)="onClick(0)">
+        <area shape="rect" coords="130,0,260,260" alt="rating-2" (click)="onClick(1)">
+        <area shape="rect" coords="260,0,390,390" alt="rating-3" (click)="onClick(2)">
+        <area shape="rect" coords="390,0,520,520" alt="rating-4" (click)="onClick(3)">
+        <area shape="rect" coords="520,0,650,650" alt="rating-5" (click)="onClick(4)">
+      </map>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Feedback</mat-label>
+        <input matInput placeholder="Selected feedback" formControlName="rating">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-error style="font-size: 15px"
+    *ngIf="feedback_rpa_form.get('rating').errors && feedback_rpa_form.get('rating').errors.missingRating">
+    Please Select your Valuable Feedback
+  </mat-error>
+  <mat-form-field style="width:50% !important;" appearance="outline">
+    <mat-label>Things that you liked</mat-label>
+    <textarea rows="6" matInput placeholder="What did you like about this volunteering activity?"
+      formControlName="liked_things"></textarea>
+  </mat-form-field>
+  <br>
+  <mat-form-field style="width:50% !important;" appearance="outline">
+    <mat-label>Things that can be improved</mat-label>
+    <textarea rows="6" matInput placeholder="What can be improved in this volunteering activity?"
+      formControlName="improvements" [errorStateMatcher]="errorMatcher">  </textarea>
+    <mat-error
+      *ngIf="feedback_rpa_form.get('improvements').errors && feedback_rpa_form.get('improvements').errors.missingComments">
+      Please share your thoughts on things that can be improved
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button class="custom-button-green" (click)="submitFeedback()">Submit Feedback</button>
+  &nbsp;
+  <button mat-raised-button class="custom-button-gray" (click)="resetRPAForm()">Reset</button>
+  <br><br><br><br>
+</form>

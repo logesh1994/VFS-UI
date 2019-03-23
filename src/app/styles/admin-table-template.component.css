@@ -1,0 +1,44 @@
+.table-section {
+    width: 100%;
+    line-break: unset;
+    white-space: nowrap;
+    overflow: auto;
+    vertical-align: middle;
+    height: 100%;
+  }
+ 
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+tr:hover {
+  background-color: #ffa;
+}
+
+.edit-icon:click {
+  background: #42A948;
+}
+
+.no-results {
+  display: flex;
+  justify-content: center;
+  padding: 14px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.ripple {
+  background-position: center;
+  transition: 'background 0.8s';
+}
+
+.ripple:hover {
+  background: lightgreen radial-gradient(circle, transparent 1%, lightcoral 1%) center/15000%;
+}
+
+.ripple:active {
+  background-color: lightgreen;
+  background-size: 100%;
+  transition: 'background 0s';
+}

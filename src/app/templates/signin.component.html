@@ -1,0 +1,26 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<section>
+  <slideshow [height]="height" [minHeight]="'525px'" [autoPlay]="true" [showArrows]="true" [imageUrls]="imagesUrl"
+    [lazyLoad]="imagesUrl?.length > 1" [autoPlayWaitForLazyLoad]="true" class="slide">
+  </slideshow>
+</section>
+<section class="login">
+  <div class="card">
+    <mat-card class="contents">
+      <form [formGroup]="login_form" (ngSubmit)="validateUser()">
+        <mat-card-content>
+          <mat-form-field class="field">
+            <input matInput placeholder="Login Id" formControlName="loginId">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="field">
+            <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </mat-form-field>
+          <br>
+          <button class="custom-button-green" mat-raised-button>Login</button>
+        </mat-card-content>
+      </form>
+    </mat-card>
+  </div>
+</section>

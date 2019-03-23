@@ -1,0 +1,15 @@
+<button mat-raised-button class="custom-button-green" (click)="openUploadDialog()"> Upload Data</button>
+
+<br>
+<br>
+
+<ng-container *ngIf="TABLE_DATA === null">
+    Loading tabs...
+</ng-container>
+<mat-tab-group color="accent" backgroundColor="primary" animationDuration="2000ms" (selectedTabChange)="openSnackBar($event)">
+    <ng-container *ngFor="let table of TABLE_DATA">
+        <mat-tab [label]="table.tableName">
+            <admin-template-table [tableName]="table.tableName" [displayedColumns]="table.columnNames" [baseDataSource]="table.data"></admin-template-table>
+        </mat-tab>
+    </ng-container>
+</mat-tab-group>

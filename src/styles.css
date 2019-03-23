@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.custom-button-green {
+    /* padding: 5px; */
+    color: white;
+    /* background-color: #009578; */
+    background-color: #00b140;
+    cursor: pointer;
+    box-shadow: 5px 5px lightgray !important;
+  }
+  
+  .custom-button-green:hover {
+    /* background-color: #00b28f; */
+    background-color: #008d31;
+}
+
+.custom-button-gray {
+  padding: 5px;
+  color: white;
+  background-color: gray;
+  cursor: pointer;
+  box-shadow: 5px 5px lightgray !important;
+}
+
+.custom-button-gray:hover {
+  background-color: lightcoral;
+}
