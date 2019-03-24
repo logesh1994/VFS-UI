@@ -22,8 +22,8 @@ export class AppComponent implements OnInit {
     { navLabel: "Feedback RPA", route: "/feedback-RPA" },
     { navLabel: "Feedback RFA", route: "/feedback-RFA" },
     { navLabel: "Feedback UR", route: "/feedback-UR" },
-    { navLabel: "Admin Tables", route: "/admin-tables" },
     { navLabel: "Insights", route: "/insights" },
+    { navLabel: "Admin Tables", route: "/admin-tables" },
     { navLabel: "Event Data", route: "/event-data" },
     { navLabel: "Post Man", route: "/postman" },
     { navLabel: "Contact", route: "/contact" }
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
 
   postRequestData: Object = {};
 
-  dataUrl: string =  "http://172.18.1.115:8083/vfs/api/v1/feedback/getFeedbackTemplate";
+  dataUrl: string =  "http://localhost:8083/vfs/api/v1/feedback/getFeedbackTemplate";
 
   constructor(private router: Router, 
     private loadingService: LoadingService, 

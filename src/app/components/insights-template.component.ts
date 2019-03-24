@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input, AfterViewInit, Output } from '@ang
 import { ChartComponent } from 'angular2-chartjs';
 
 @Component({
-  selector: 'app-insights',
+  selector: 'app-insights-template',
   templateUrl: '../templates/insights-template.component.html',
   styleUrls: ['../styles/insights-template.component.css']
 })

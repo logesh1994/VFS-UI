@@ -1,5 +1,15 @@
 export class ChartDefinition {
+    name: string;
     type: string;
-    data: any;
+    data: ChartDefDataSet;
     options: any
+}
+export class ChartDefDataSet {
+    label: string;
+    data: any[];
+    backgroundColor: any[]
+}
+export class ChartDefData {
+        labels: string[];
+        datasets: ChartDefDataSet []
 }

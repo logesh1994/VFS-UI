@@ -1,0 +1,47 @@
+<form [formGroup]="insights_form">
+  <mat-form-field style="width: 250px !important;" appearance="outline">
+    <mat-label>Please Select a Insight level</mat-label>
+    <mat-select placeholder="Insight level" formControlName="insight_level">
+      <mat-option>Select Insight level</mat-option>
+      <mat-option *ngFor="let level of insight_list" [value]="level">{{level}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="insights_form.get('insight_level').errors && insights_form.get('insight_level').errors.required ">
+      Please select a valid insight level
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field style="width:250px !important;padding-left: 20px;" appearance="outline">
+    <mat-label>From Date</mat-label>
+    <input matInput [matDatepicker]="dp1" placeholder="From Date" formControlName="from_date" [max]="today">
+    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+    <mat-datepicker #dp1></mat-datepicker>
+    <mat-error *ngIf="insights_form.get('from_date').errors && insights_form.get('from_date').errors.required">
+      Please pick from date
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field style="width:250px !important;padding-left: 20px;" appearance="outline">
+    <mat-label>To Date</mat-label>
+    <input matInput [matDatepicker]="dp2" placeholder="To Date" formControlName="to_date" [max]="today">
+    <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+    <mat-datepicker #dp2></mat-datepicker>
+    <mat-error *ngIf="insights_form.get('to_date').errors && insights_form.get('to_date').errors.required">
+      Please pick to date
+    </mat-error>
+    <mat-error *ngIf="insights_form.get('to_date').errors && insights_form.get('to_date').errors.lessThanFromDate">
+      Please pick to date that is greater than from date
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button class="custom-button-green" (click)="submit()">Submit Feedback</button>
+  &nbsp;
+  <button mat-raised-button class="custom-button-gray" (click)="resetForm()">Reset</button>
+  <br><br><br><br>
+</form>
+<ng-container *ngFor="let chart of chartDefArray">
+  <h4>{{chart.name}}</h4>
+  <app-insights-template [type]="chart.type" [data]="chart.data" [options]="chart.options"></app-insights-template>
+  <!-- <mat-form-field style="width:60% !important; padding-left: 10px;" appearance="outline">
+      <mat-label>Response</mat-label>
+      <textarea rows="20" matInput placeholder="Response Data" formControlName="event_data">{{response}}</textarea>
+    </mat-form-field> -->
+</ng-container>
+<br><br><br><br>

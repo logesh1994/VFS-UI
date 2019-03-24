@@ -6,6 +6,7 @@ import { ChartDefinition } from '../models/ChartDefinition';
 import { LoadingService } from '../services/loading.service';
 import { UserData } from '../models/UserData';
 import { AuthenticationService } from '../services/authentication.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -14,114 +15,84 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class HomeComponent implements OnInit {
 
-  users: Object;
-  errorMessage: object;
 
-  //chart data
-  type: any;
-  data: any;
-  options: any;
+  constructor(private httpService: HttpService, private loadingService: LoadingService
+    , private authService: AuthenticationService) {
 
-  chartDefinitions: ChartDefinition[];
-
-  chart1: ChartDefinition = new ChartDefinition();
-  chart2: ChartDefinition = new ChartDefinition();
-  chart3: ChartDefinition = new ChartDefinition();
-
-  @ViewChild('progressLoader') progressLoader: ElementRef; 
-
-  constructor(private cdr: ChangeDetectorRef, private uploadDialog: MatDialog, 
-    private httpService: HttpService, private loadingService: LoadingService, private authService:AuthenticationService) { 
-   
   }
+
+  event_data_lookup_url: string = "http://localhost:8082/vfs/api/v1/admin/getEventDataList";
+  trigger_Email_batch_url: string = "http://localhost:8082/vfs/api/v1/admin/triggerEmailBatch/";
+
+  event_data_form = new FormGroup({
+    event_id: new FormControl('', [Validators.required]),
+    participated_count: new FormControl(),
+    unregistered_count: new FormControl(),
+    failed_to_attend_count: new FormControl(),
+    submitted_rating: new FormControl(),
+    submitted_reason_rfa: new FormControl(),
+    submitted_reason_ur: new FormControl()
+  });
+  event_list: string[] = [];
+  eventData: any;
 
   ngOnInit() {
-    if(this.authService.validUser(["Admin","Volunteer"])) {
-    this.loadingService.show('Loading User Data ...');
-    this.users = this.httpService.getData("https://reqres.in/api/users").subscribe(data => {
-    this.users = data;
-    this.loadingService.hide();
-    },
-      error => {this.errorMessage = error});
-      this.setChartData();
-      console.log(this.chart1);
-      console.log(this.chart2);
-      console.log(this.chart3);
+    this.loadingService.show('Loading Home Page ...');
+    this.httpService.getData(this.event_data_lookup_url).subscribe(responseData => {
+      console.log(responseData);
+      if (responseData.status_code == 200) {
+        this.eventData = responseData.result;
+        responseData.result.forEach(data => {
+          this.event_list.push(data['Event Id']);
+          this.loadingService.hide();
+        });
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.event_data_form.controls.participated_count.disable();
+    this.event_data_form.controls.unregistered_count.disable();
+    this.event_data_form.controls.failed_to_attend_count.disable();
+    this.event_data_form.controls.submitted_rating.disable();
+    this.event_data_form.controls.submitted_reason_rfa.disable();
+    this.event_data_form.controls.submitted_reason_ur.disable();
   }
-}
 
-  openUploadDialog() {
-    const uploadDialogRef = this.uploadDialog.open(ExcelUploadDialogComponent, {
+  onEventSelect() {
+    console.log(this.event_data_form.controls.event_id.value);
+    this.eventData.forEach(element => {
+      if (element['Event Id'] == this.event_data_form.controls.event_id.value) {
+    this.event_data_form.controls.participated_count.setValue(element['Participation Count']);
+    this.event_data_form.controls.unregistered_count.setValue(element['Unregistered Count']);
+    this.event_data_form.controls.failed_to_attend_count.setValue(element['Failed To attend Count']);
+    this.event_data_form.controls.submitted_rating.setValue(element['Submitted Rating Count']);
+    this.event_data_form.controls.submitted_reason_rfa.setValue(element['Submitted Reason Count(RFA)']);
+    this.event_data_form.controls.submitted_reason_ur.setValue(element['Submitted Reason Count(UR)']);
+      }
     });
   }
 
-  setChartData() {
-    this.chart1.data = {
-      labels: ["January", "February", "March", "April", "May", "June"],
-      datasets: [
-        {
-          label: "My First dataset",
-          data: [65, 59, 80, 81, 56, 55],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-        ],
+  resetForm() {
+    this.event_data_form.reset();
+    this.event_data_form.controls.event_id.setErrors(null);
+  }
+
+  triggerEmailBatch() {
+    if(this.event_data_form.controls.event_id.value != null) {
+      console.log("Email Batch Triggered");
+      this.loadingService.show('Triggering Email Batch...');
+      this.httpService.getData(this.trigger_Email_batch_url+this.event_data_form.controls.event_id.value).subscribe(responseData => {
+        console.log(responseData);
+        if (responseData.status_code == 200) {
+            console.log(responseData.result);
+            this.loadingService.hide();
         }
-      ]
-    };
-    this.chart2.data = {
-      labels: ["January", "February", "March", "April", "May", "June"],
-      datasets: [
-        {
-          label: "My First dataset",
-          data: [65, 59, 80, 81, 56, 55],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-        ],
-        }
-      ]
-    };
-    this.chart3.data = {
-      labels: ["January", "February", "March", "April", "May", "June"],
-      datasets: [
-        {
-          label: "My First dataset",
-          data: [65, 59, 80, 81, 56, 55],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-        ],
-        }
-      ]
-    };
-    this.chart1.type = 'pie';
-    this.chart2.type = 'line';
-    this.chart3.type = 'bar';
-   this.chart1.options = {
-    responsive: true,
-    maintainAspectRatio: false
-  };
-  this.chart2.options = {
-    responsive: true,
-    maintainAspectRatio: false
-  };
-  this.chart3.options = {
-    responsive: true,
-    maintainAspectRatio: false
-  };
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      this.event_data_form.controls.event_id.setErrors({ required: true });
+    }
   }
 
 }

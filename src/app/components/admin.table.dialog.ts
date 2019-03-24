@@ -25,7 +25,7 @@ export class AdminTableDialogComponent implements OnInit {
   postData: AdminTablePostData;
   post_response: any;
 
-  dataUrl: string = "http://172.18.1.115:8082/vfs/api/v1/admin/updateAdminData";
+  dataUrl: string = "http://localhost:8082/vfs/api/v1/admin/updateAdminData";
 
   constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<AdminTableDialogComponent>,
@@ -81,8 +81,8 @@ export class AdminTableDialogComponent implements OnInit {
     console.log("Ng Init of dialog component");
     console.log(this.action);
     console.log(this.rowData);
+
   }
-  
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -113,14 +113,6 @@ export class AdminTableDialogComponent implements OnInit {
         break;
       }
       case 'delete': {
-        this.getPostData("DELETE");
-        this.httpService.postData(this.dataUrl, JSON.stringify(this.postData)).subscribe(responseData => {
-          this.post_response = JSON.stringify(responseData, undefined, 2)
-          console.log(this.post_response);
-          this.dialogRef.close();
-        }, error => {
-          console.log(error);
-        });
         break;
       }
       default: {

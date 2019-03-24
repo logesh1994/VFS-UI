@@ -7,13 +7,13 @@ import { AdminTablesComponent } from './components/admin-tables.component';
 import { PostmanComponent } from './components/postman.component';
 import { FeedbackRpaComponent } from './components/feedback-rpa.component';
 import { FeedbackRfaComponent } from './components/feedback-rfa.component';
-import { InsightsTemplateComponent } from './components/insights-template.component';
 import { FeedbackUrComponent } from './components/feedback-ur.component';
 import { EventDataComponent } from './components/event-data.component';
 import { UploadDataComponent } from './components/upload-data.component';
 import { ErrorComponent } from './components/error.component';
 import { LoadingComponent } from './components/loading.component';
 import { SuccessComponent } from './components/success.component';
+import { InsightsComponent } from './components/insights.component';
 
 const routes: Routes = [{ path: 'home', component: HomeComponent },
 { path: 'contact', component: ContactComponent },
@@ -22,7 +22,7 @@ const routes: Routes = [{ path: 'home', component: HomeComponent },
 { path: 'postman', component: PostmanComponent },
 { path: 'feedback-RPA', component: FeedbackRpaComponent },
 { path: 'feedback-RFA', component: FeedbackRfaComponent },
-{ path: 'insights', component: InsightsTemplateComponent },
+{ path: 'insights', component: InsightsComponent},
 { path: 'feedback-UR', component: FeedbackUrComponent },
 { path: 'event-data', component: EventDataComponent },
 { path: 'upload-data', component: UploadDataComponent },

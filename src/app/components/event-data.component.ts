@@ -11,7 +11,7 @@ import { CommonSnackBarComponent } from './common-snack-bar.component';
 })
 export class EventDataComponent implements OnInit {
  // dataUrl: string = "assets/test-data/event-data.json";
- dataUrl: string = "http://172.18.1.115:8082/vfs/api/v1/admin/getEventDetailsData";
+ dataUrl: string = "http://localhost:8082/vfs/api/v1/admin/getEventDetailsData";
   TABLE_DATA: AdminTableData[] = [];
   adminTable: AdminTableData = new AdminTableData();
 

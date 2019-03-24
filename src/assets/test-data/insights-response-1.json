@@ -1,0 +1,136 @@
+{
+  "result": [
+    {
+      "chartData": 
+        {
+          "chartType": "Event Rating",
+          "labels": [
+            "Very Good",
+            "Good",
+            "Neutral",
+            "Poor",
+            "Very Poor"
+          ],
+          "datasets": [
+            {
+              "label": "EVENT001",
+              "data": [
+                35,
+                45,
+                50,
+                25,
+                10
+              ]
+            },
+            {
+              "label": "EVENT002",
+              "data": [
+                10,
+                20,
+                30,
+                40,
+                50
+              ]
+            },
+			{
+              "label": "EVENT003",
+              "data": [
+                50,
+                40,
+                30,
+                30,
+                20
+              ]
+            },
+			{
+              "label": "EVENT004",
+              "data": [
+                10,
+                20,
+                30,
+                40,
+                50
+              ]
+            }
+          ]
+        }
+      
+    },
+    {
+      "chartData": 
+        {
+          "chartType": "Event Failed",
+          "labels": [
+            "Unexpected Family commitment",
+            "Unexpected official work",
+            "Event was not what I expected",
+            "Didnot recieve further information about event",
+            "Incorrectly registered",
+            "Donot wish to disclose"
+          ],
+          "datasets": [
+            {
+              "label": "EVENT001",
+              "data": [
+                35,
+                45,
+                50,
+                25,
+                10
+              ]
+            },
+            {
+              "label": "EVENT002",
+              "data": [
+                10,
+                20,
+                30,
+                40,
+                50
+              ]
+            }
+          ]
+        }
+      
+    },
+	{
+      "chartData": 
+        {
+          "chartType": "Event UR",
+          "labels": [
+            "Unexpected Family commitment",
+            "Unexpected official work",
+            "Event was not what I expected",
+            "Didnot recieve further information about event",
+            "Incorrectly registered",
+            "Donot wish to disclose"
+          ],
+          "datasets": [
+            {
+              "label": "EVENT001",
+              "data": [
+                35,
+                45,
+                50,
+                25,
+                10
+              ]
+            },
+            {
+              "label": "EVENT002",
+              "data": [
+                10,
+                20,
+                30,
+                40,
+                50
+              ]
+            }
+          ]
+        }
+      
+    }
+  ],
+  "description": "Success",
+  "status_code": 200
+}

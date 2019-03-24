@@ -23,7 +23,7 @@ export class FeedbackRpaComponent implements OnInit {
     }
   );
 
-  dataUrl: string = "http://172.18.1.115:8083/vfs/api/v1/feedback/saveFeedback";
+  dataUrl: string = "http://localhost:8083/vfs/api/v1/feedback/saveFeedback";
   postRequestData: Object = {};
 
   rating_options: string[] = ['Very Poor', 'Poor', 'Neutral', 'Good', 'Very Good'];

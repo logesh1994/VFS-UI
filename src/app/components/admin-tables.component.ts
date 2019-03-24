@@ -16,7 +16,7 @@ export class AdminTablesComponent implements OnInit {
 
  // dataUrl: string = "assets/test-data/admin-table-data.json";
  //dataUrl: string = "assets/test-data/Actual-Admin-Data-Response.json";
- dataUrl: string = "http://172.18.1.115:8082/vfs/api/v1/admin/getAdminData";
+ dataUrl: string = "http://localhost:8082/vfs/api/v1/admin/getAdminData";
   TABLE_DATA: AdminTableData[] = [];
   adminTable: AdminTableData = new AdminTableData();
   isAdminUser: boolean;

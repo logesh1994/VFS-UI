@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material';
+import {MatInputModule, MatNativeDateModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -23,6 +23,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTreeModule} from '@angular/material/tree';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
 import { ChartModule } from 'angular2-chartjs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
@@ -50,6 +52,7 @@ import { UploadDataComponent } from './components/upload-data.component';
 import { ErrorComponent } from './components/error.component';
 import { LoadingComponent } from './components/loading.component';
 import { SuccessComponent } from './components/success.component';
+import { InsightsComponent } from './components/insights.component';
 // import { LoadingService } from './services/loading.service';
 // import { AuthenticationService } from './services/authentication.service';
 // import { AppConstants } from './models/Appconstants';
@@ -75,6 +78,7 @@ import { SuccessComponent } from './components/success.component';
     ErrorComponent,
     LoadingComponent,
     SuccessComponent,
+    InsightsComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,7 +109,9 @@ import { SuccessComponent } from './components/success.component';
     ChartsModule,
     MatToolbarModule,
     MatTreeModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatDatepickerModule,
+    MatMomentDateModule
   ],
    providers: [],
   bootstrap: [AppComponent],
