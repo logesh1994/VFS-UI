@@ -15,9 +15,7 @@ export class UploadDataComponent implements OnInit {
   uploadDataDialogRef: MatDialogRef<ExcelUploadDialogComponent>;
   TABLE_DATA: AdminTableData[] = [];
 
-  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private loadingService: LoadingService) { 
-   
-  }
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private loadingService: LoadingService) { }
 
   ngOnInit() {}
 

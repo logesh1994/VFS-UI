@@ -7,6 +7,7 @@ import { LoadingService } from '../services/loading.service';
 import { UserData } from '../models/UserData';
 import { AuthenticationService } from '../services/authentication.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private httpService: HttpService, private loadingService: LoadingService
-    , private authService: AuthenticationService) {
+    , private authService: AuthenticationService, private router: Router) {
 
   }
 
@@ -35,9 +36,12 @@ export class HomeComponent implements OnInit {
   });
   event_list: string[] = [];
   eventData: any;
+  status_Message: string;
+  error_Message: string;
 
   ngOnInit() {
-    this.loadingService.show('Loading Home Page ...');
+    if(this.authService.validUser(['Admin','POC'])) {
+      this.loadingService.show('Loading Home Page ...');
     this.httpService.getData(this.event_data_lookup_url).subscribe(responseData => {
       console.log(responseData);
       if (responseData.status_code == 200) {
@@ -47,9 +51,11 @@ export class HomeComponent implements OnInit {
           this.loadingService.hide();
         });
       }
-      //TODO Send to error page
     }, error => {
       console.log(error);
+      this.loadingService.setErrorMessage('Error in retrieving data ...');
+      this.router.navigate(['/error']);
+      this.loadingService.hide();
     });
     this.event_data_form.controls.participated_count.disable();
     this.event_data_form.controls.unregistered_count.disable();
@@ -57,9 +63,12 @@ export class HomeComponent implements OnInit {
     this.event_data_form.controls.submitted_rating.disable();
     this.event_data_form.controls.submitted_reason_rfa.disable();
     this.event_data_form.controls.submitted_reason_ur.disable();
+    }
   }
 
   onEventSelect() {
+    this.status_Message = null;
+    this.error_Message = null;
     console.log(this.event_data_form.controls.event_id.value);
     this.eventData.forEach(element => {
       if (element['Event Id'] == this.event_data_form.controls.event_id.value) {
@@ -76,9 +85,13 @@ export class HomeComponent implements OnInit {
   resetForm() {
     this.event_data_form.reset();
     this.event_data_form.controls.event_id.setErrors(null);
+    this.status_Message = null;
+    this.error_Message = null;
   }
 
   triggerEmailBatch() {
+    this.status_Message = null;
+    this.error_Message = null;
     if(this.event_data_form.controls.event_id.value != null) {
       console.log("Email Batch Triggered");
       this.loadingService.show('Triggering Email Batch...');
@@ -86,9 +99,12 @@ export class HomeComponent implements OnInit {
         console.log(responseData);
         if (responseData.status_code == 200) {
             console.log(responseData.result);
+            this.status_Message = "Email Batch Triggered Successfully";
             this.loadingService.hide();
         }
       }, error => {
+        this.error_Message = "Error triggering the batch, please try again later";
+        this.loadingService.hide();
         console.log(error);
       });
     } else {

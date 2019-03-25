@@ -4,6 +4,7 @@ import { Subject, Observable } from 'rxjs';
 import { UserData } from '../models/UserData';
 import { AppConstantsService } from './app-constants.service';
 import { Router } from '@angular/router';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +15,23 @@ export class AuthenticationService {
   dataUrl: string = "http://localhost:8081/vfs/api/v1/login/authenticate";
 
   postRequestData: any ={};
+  error = {};
 
-  constructor(private httpService: HttpService, private appConstants: AppConstantsService, private router: Router) { }
+  constructor(private httpService: HttpService, private appConstants: AppConstantsService, private router: Router, private loadingService: LoadingService) { }
 
   authenticate(userName: string, pswd: string) {
+    this.loadingService.show("Contacting Authentication Service ...");
     this.postRequestData['Employee Id'] = userName;
     this.postRequestData['Password'] = pswd;
     this.httpService.postData(this.dataUrl, JSON.stringify(this.postRequestData)).subscribe(responseData => {
       console.log(responseData);
         this.userData.next(responseData);
+        this.loadingService.hide();
         console.log("Recieved Authentication response ...");
     }, error => {
+      this.loadingService.setErrorMessage("Error in Login Service, please try again after some time ...");
+      this.loadingService.hide();
+      this.router.navigate(['/error']);
       console.log(error);
     });
   }
@@ -34,8 +41,9 @@ export class AuthenticationService {
   }
 
   validUser(role: string[]) {
-    var userData: UserData = JSON.parse(sessionStorage.getItem("userData"));
-    if (userData && userData.isValidUser && role.includes(userData.role)) {
+    var userData: any = JSON.parse(sessionStorage.getItem("userData"));
+    if (userData && userData.isValidUser && role.includes(userData.Role)) {
+      console.log(userData.isValidUser);
       return userData.isValidUser;
     } else {
       this.router.navigate(['signin']);

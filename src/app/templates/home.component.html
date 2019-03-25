@@ -11,6 +11,8 @@
             Please Select a event
         </mat-error>
     </mat-form-field>
+    <span *ngIf="status_Message" style="color: #00b140; padding-left: 20px">{{status_Message}}</span>
+    <span *ngIf="error_Message" style="color: red; padding-left: 20px">{{error_Message}}</span>
     <br>
     <ng-container *ngIf="event_data_form.get('event_id').value">
         <mat-form-field style="width:30% !important;" appearance="outline">

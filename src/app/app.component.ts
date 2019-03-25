@@ -17,10 +17,9 @@ export class AppComponent implements OnInit {
   title = 'Volunteer Feedback System';
   ADMIN_ROUTES = [
     { navLabel: "Home", route: "/home" },
-    { navLabel: "Upload Data", route: "/upload-data" },
-    { navLabel: "Feedback RPA", route: "/feedback-RPA" },
-    { navLabel: "Feedback RFA", route: "/feedback-RFA" },
-    { navLabel: "Feedback UR", route: "/feedback-UR" },
+    { navLabel: "Feedback RPA Template", route: "/feedback-RPA" },
+    { navLabel: "Feedback RFA Template", route: "/feedback-RFA" },
+    { navLabel: "Feedback UR Template", route: "/feedback-UR" },
     { navLabel: "Insights", route: "/insights" },
     { navLabel: "Admin Tables", route: "/admin-tables" },
     { navLabel: "Event Data", route: "/event-data" },
@@ -30,9 +29,9 @@ export class AppComponent implements OnInit {
 
   VOLUNTEER_ROUTES = [
     { navLabel: "Home", route: "/home" },
-    { navLabel: "Feedback RPA", route: "/feedback-RPA" },
-    { navLabel: "Feedback RFA", route: "/feedback-RFA" },
-    { navLabel: "Feedback UR", route: "/feedback-UR" },
+    { navLabel: "Feedback RPA Template", route: "/feedback-RPA" },
+    { navLabel: "Feedback RFA Template", route: "/feedback-RFA" },
+    { navLabel: "Feedback UR Template", route: "/feedback-UR" },
   ]
 
   FEEDBACK_ROUTES = [ "/feedback-RPA", "/feedback-RFA", "/feedback-UR"];
@@ -119,6 +118,7 @@ export class AppComponent implements OnInit {
             break;
           }
         }
+        this.router.navigate(['/home']);
       }
     } else {
       console.log(this.currentRoute);

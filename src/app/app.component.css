@@ -1,5 +1,6 @@
 /* import url */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import '~material-design-icons/iconfont/material-icons.css';
 header {
   /* background: rgb(3, 154, 255); */
   background: #0033a0;
