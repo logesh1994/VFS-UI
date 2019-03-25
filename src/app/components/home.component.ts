@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
           this.loadingService.hide();
         });
       }
+      //TODO Send to error page
     }, error => {
       console.log(error);
     });

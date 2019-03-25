@@ -12,6 +12,7 @@ export class SigninComponent implements OnInit {
 
   hide = true;
   public imagesUrl;
+  error_message: string;
   login_form = new FormGroup ({
     loginId : new FormControl(),
     password : new FormControl() 
@@ -26,6 +27,11 @@ export class SigninComponent implements OnInit {
       "/assets/185.jpg",
       "/assets/186.png"
       ];
+      this.authService.getUserData().subscribe(data => {
+        if(data.status_code == 110) {
+          this.error_message = "You dont have access to this Application";
+        }
+      });
   }
 
   validateUser() {
@@ -34,6 +40,7 @@ export class SigninComponent implements OnInit {
     //   this.router.navigateByUrl('home');
     //   console.log("Succesfully Logged in ...")
     // }
+    this.error_message = null;
     if(this.login_form.value.loginId && this.login_form.value.password) {
       console.log(this.login_form.value.loginId + "  " + this.login_form.value.password);
       this.authService.authenticate(this.login_form.value.loginId, this.login_form.value.password);

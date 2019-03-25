@@ -1,4 +1,3 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <section>
   <slideshow [height]="height" [minHeight]="'525px'" [autoPlay]="true" [showArrows]="true" [imageUrls]="imagesUrl"
     [lazyLoad]="imagesUrl?.length > 1" [autoPlayWaitForLazyLoad]="true" class="slide">
@@ -18,6 +17,8 @@
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </mat-form-field>
           <br>
+          <span style="color: red">{{error_message}}
+          <br><br></span>
           <button class="custom-button-green" mat-raised-button>Login</button>
         </mat-card-content>
       </form>

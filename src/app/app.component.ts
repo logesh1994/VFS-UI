@@ -15,7 +15,6 @@ import { FeedbackService } from './services/feedback.service';
 export class AppComponent implements OnInit {
 
   title = 'Volunteer Feedback System';
-
   ADMIN_ROUTES = [
     { navLabel: "Home", route: "/home" },
     { navLabel: "Upload Data", route: "/upload-data" },
@@ -41,7 +40,7 @@ export class AppComponent implements OnInit {
   @ViewChild('sidenav') sidenav;
   toggleMenu: boolean = true;
   loadingMessage: string;
-  userData: UserData = new UserData();
+  userData: any;
   sideNavRoutes: any;
 
   currentRoute: string;
@@ -68,12 +67,14 @@ export class AppComponent implements OnInit {
     });
 
     this.authService.getUserData().subscribe(data => {
-      this.userData = data;
-      sessionStorage.setItem("userData", JSON.stringify(this.userData));
-      console.log("Updating User data ...");
-      console.log(sessionStorage.getItem("userData"));
-      this.router.navigate(['home']);
-      this.initiateNavigation();
+      if (data.status_code == 200) {
+        this.userData = data.result;
+        sessionStorage.setItem("userData", JSON.stringify(this.userData));
+        console.log("Updating User data ...");
+        console.log(sessionStorage.getItem("userData"));
+        this.router.navigate(['home']);
+        this.initiateNavigation();
+      }
     });
   }
 
@@ -100,13 +101,17 @@ export class AppComponent implements OnInit {
     if (sessionStorage.getItem("userData")) {
       this.userData = JSON.parse(sessionStorage.getItem("userData"));
       if (this.userData.isValidUser) {
-        switch (this.userData.role) {
+        switch (this.userData.Role) {
           case 'Admin': {
             this.sideNavRoutes = this.ADMIN_ROUTES;
             break;
           }
-          case 'Volunteer': {
+          case 'POC': {
+            //TODO Data when the assosiate is POC
             this.sideNavRoutes = this.VOLUNTEER_ROUTES;
+            break;
+          }
+          case 'Volunteer': {
             break;
           }
           default: {

@@ -11,15 +11,19 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
 
   private userData = new Subject<UserData>();
+  dataUrl: string = "http://localhost:8081/vfs/api/v1/login/authenticate";
+
+  postRequestData: any ={};
 
   constructor(private httpService: HttpService, private appConstants: AppConstantsService, private router: Router) { }
 
   authenticate(userName: string, pswd: string) {
-    this.httpService.getData(this.appConstants.SIGN_IN_URL).subscribe(responseData => {
-      if (responseData.userData) {
-        this.userData.next(responseData.userData[0]);
-        console.log("Authentication Successfull ...");
-      }
+    this.postRequestData['Employee Id'] = userName;
+    this.postRequestData['Password'] = pswd;
+    this.httpService.postData(this.dataUrl, JSON.stringify(this.postRequestData)).subscribe(responseData => {
+      console.log(responseData);
+        this.userData.next(responseData);
+        console.log("Recieved Authentication response ...");
     }, error => {
       console.log(error);
     });
