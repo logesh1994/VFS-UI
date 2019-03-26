@@ -54,10 +54,13 @@ export class FeedbackRfaComponent implements OnInit {
         if (responseData && responseData.status_code == 200) {
           this.loadingService.setSuccessMessage(responseData.result['Display Message']);
           this.router.navigate(['/success']);
+        } else if(responseData && responseData.status_code == 400){
+          this.loadingService.setErrorMessage("Error saving your Feedback, please try again later !!!");
+          this.router.navigate(['/error']);
         }
       }, error => {
         console.log(error);
-        this.loadingService.setErrorMessage("Error saving your Feedback !!!");
+        this.loadingService.setErrorMessage("Service is down, please try again later !!!");
         this.router.navigate(['/error']);
       });
     }

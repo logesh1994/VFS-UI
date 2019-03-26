@@ -1,5 +1,25 @@
-<h1></h1>
+<h1>Please Select a Event to lookup the details</h1>
+<h6>Note: Use Location and Month filters to narrow down the event id</h6>
 <form [formGroup]="event_data_form">
+    <mat-form-field style="width:30% !important;" appearance="outline">
+        <mat-label>Please select a Location</mat-label>
+        <mat-select (selectionChange)="onLocationSelect()" placeholder="Reason" formControlName="location">
+            <mat-option>Select Event</mat-option>
+            <mat-option *ngFor="let location_selected of location_list" [value]="location_selected">
+                {{location_selected}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field style="width:30% !important;" appearance="outline">
+        <mat-label>Please select a Month</mat-label>
+        <mat-select (selectionChange)="onEventSelect()" placeholder="Reason" formControlName="month">
+            <mat-option>Select Month</mat-option>
+            <mat-option *ngFor="let selectedMonth of month_list" [value]="selectedMonth">{{selectedMonth}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
     <mat-form-field style="width:30% !important;" appearance="outline">
         <mat-label>Please select a Event</mat-label>
         <mat-select (selectionChange)="onEventSelect()" placeholder="Reason" formControlName="event_id">
@@ -16,12 +36,17 @@
     <br>
     <ng-container *ngIf="event_data_form.get('event_id').value">
         <mat-form-field style="width:30% !important;" appearance="outline">
+            <mat-label>Event Name</mat-label>
+            <input matInput placeholder="Event Name" formControlName="event_name">
+        </mat-form-field>
+        <br>
+        <mat-form-field style="width:30% !important;" appearance="outline">
             <mat-label>Participated Count</mat-label>
             <input matInput placeholder="Participated Count" formControlName="participated_count">
         </mat-form-field>
         <mat-form-field style="width:30% !important;padding-left: 30px" appearance="outline">
-            <mat-label>Submitted Rating</mat-label>
-            <input matInput placeholder="Submitted Rating" formControlName="submitted_rating">
+            <mat-label>Submitted Feedback</mat-label>
+            <input matInput placeholder="Submitted Feedback" formControlName="submitted_rating">
         </mat-form-field>
         <br>
         <mat-form-field style="width:30% !important;" appearance="outline">
@@ -29,8 +54,8 @@
             <input matInput placeholder="Unregistered Count" formControlName="unregistered_count">
         </mat-form-field>
         <mat-form-field style="width:30% !important;padding-left: 30px" appearance="outline">
-            <mat-label>Submitted Reason Count</mat-label>
-            <input matInput placeholder="Submitted Reason Count" formControlName="submitted_reason_ur">
+            <mat-label>Yet To Send Email Count</mat-label>
+            <input matInput placeholder="Yet To Send Email Count" formControlName="yet_to_send_mail_count">
         </mat-form-field>
         <br>
         <mat-form-field style="width:30% !important;" appearance="outline">
@@ -38,12 +63,15 @@
             <input matInput placeholder="Failed To Attend Count" formControlName="failed_to_attend_count">
         </mat-form-field>
         <mat-form-field style="width:30% !important;padding-left: 30px" appearance="outline">
-            <mat-label>Submitted Reason Count</mat-label>
-            <input matInput placeholder="Submitted Reason Count" formControlName="submitted_reason_ur">
+            <mat-label>Email Sent Count</mat-label>
+            <input matInput placeholder="Email Sent Count" formControlName="mail_sent_count">
         </mat-form-field>
         <br>
     </ng-container>
     <button mat-raised-button class="custom-button-green" (click)="triggerEmailBatch()">Trigger Email Batch</button>
+    &nbsp;
+    <button mat-raised-button class="custom-button-green" (click)="triggerReminderEmailBatch()">Trigger Reminder Email
+        Batch</button>
     &nbsp;
     <button mat-raised-button class="custom-button-gray" (click)="resetForm()">Reset</button>
     <br><br><br><br>

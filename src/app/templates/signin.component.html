@@ -14,7 +14,7 @@
           <br>
           <mat-form-field class="field">
             <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
-            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-icon  class="icon" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </mat-form-field>
           <br>
           <span style="color: red">{{error_message}}

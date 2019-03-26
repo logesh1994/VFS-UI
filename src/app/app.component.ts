@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { LoadingService } from './services/loading.service';
 import { AuthenticationService } from './services/authentication.service';
 import { UserData } from './models/UserData';
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     { navLabel: "Feedback UR Template", route: "/feedback-UR" },
   ]
 
-  FEEDBACK_ROUTES = [ "/feedback-RPA", "/feedback-RFA", "/feedback-UR"];
+  FEEDBACK_ROUTES = ["/feedback-RPA", "/feedback-RFA", "/feedback-UR"];
 
   @ViewChild('sidenav') sidenav;
   toggleMenu: boolean = true;
@@ -46,14 +46,14 @@ export class AppComponent implements OnInit {
 
   postRequestData: Object = {};
 
-  dataUrl: string =  "http://localhost:8083/vfs/api/v1/feedback/getFeedbackTemplate";
+  dataUrl: string = "http://localhost:8083/vfs/api/v1/feedback/getFeedbackTemplate";
 
-  constructor(private router: Router, 
-    private loadingService: LoadingService, 
+  constructor(private router: Router,
+    private loadingService: LoadingService,
     private authService: AuthenticationService, private location: Location,
     private httpService: HttpService, private feedbackService: FeedbackService) {
-      this.currentRoute = location.path();
-     }
+    this.currentRoute = location.path();
+  }
 
   ngOnInit() {
     console.log("App initited !!!");
@@ -123,7 +123,7 @@ export class AppComponent implements OnInit {
     } else {
       console.log(this.currentRoute);
       if (this.currentRoute.includes("/feedback/")) {
-       this.checkFeedbackUrl(); 
+        this.checkFeedbackUrl();
       } else {
         this.router.navigate(['/signin']);
       }
@@ -131,27 +131,33 @@ export class AppComponent implements OnInit {
   }
   checkFeedbackUrl() {
     this.router.navigate(['/loading']);
-        this.postRequestData = {};
-        var routeArray = this.currentRoute.split("/");
-        let numRegEx: RegExp = /^[0-9]*$/;
-        console.log("Length: " + routeArray.length + ",idLength: " + routeArray[2].length + " ,match: " + routeArray[2].match(numRegEx));
-        if (routeArray.length == 4 && routeArray[2].length == 6 && 
-          routeArray[2].match(numRegEx)) {
-            this.postRequestData['EventDetail Id'] = routeArray[3];
-            this.postRequestData['Employee Id'] = routeArray[2];
-            this.httpService.postData(this.dataUrl, JSON.stringify(this.postRequestData)).subscribe(responseData => {
-              console.log(responseData);
-              if (responseData && responseData.status_code == 200) {
-                this.redirectToFeedbackPage(responseData.result);
-              }
-            }, error => {
-              console.log(error);
-              this.loadingService.setErrorMessage("Invalid URL !!!");
-              this.router.navigate(['/error']);
-            });
-          }
+    this.postRequestData = {};
+    var routeArray = this.currentRoute.split("/");
+    let numRegEx: RegExp = /^[0-9]*$/;
+    console.log("Length: " + routeArray.length + ",idLength: " + routeArray[2].length + " ,match: " + routeArray[2].match(numRegEx));
+    if (routeArray.length == 4 && routeArray[2].length == 6 &&
+      routeArray[2].match(numRegEx)) {
+      this.postRequestData['EventDetail Id'] = routeArray[3];
+      this.postRequestData['Employee Id'] = routeArray[2];
+      this.httpService.postData(this.dataUrl, JSON.stringify(this.postRequestData)).subscribe(responseData => {
+        console.log(responseData);
+        if (responseData && responseData.status_code == 200) {
+          this.redirectToFeedbackPage(responseData.result);
+        } else if (responseData && responseData.status_code == 400) {
+          this.loadingService.setErrorMessage("Invalid URL !!!");
+          this.router.navigate(['/error']);
+        }
+      }, error => {
+        console.log(error);
+        this.loadingService.setErrorMessage("Feedback Service is down, please try again later ...");
+        this.router.navigate(['/error']);
+      });
+    } else {
+      this.loadingService.setErrorMessage("Invalid URL !!!");
+      this.router.navigate(['/error']);
+    }
   }
-  redirectToFeedbackPage(data: any){
+  redirectToFeedbackPage(data: any) {
     this.feedbackService.employee_id = data['Employee Id'];
     this.feedbackService.display_message = data['Display Message'];
     this.feedbackService.feedback_type = data['Feedback Type'];
@@ -161,7 +167,7 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/feedback-RPA']);
     } else if ((data['Feedback Type'] == "RFA")) {
       this.router.navigate(['/feedback-RFA']);
-    } else if((data['Feedback Type'] == "Submitted")) {
+    } else if ((data['Feedback Type'] == "Submitted")) {
       this.loadingService.setSuccessMessage(data['Display Message']);
       this.router.navigate(['/success']);
     }
