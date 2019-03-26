@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort, MatDialogRef } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { AdminTableDialogComponent } from './admin.table.dialog';
@@ -14,7 +14,10 @@ import { LoadingService } from '../services/loading.service';
 })
 export class AdminTableTemplateComponent implements AfterViewInit {
 
-  constructor(public dialog: MatDialog, public excelService: ExcelService, private loadingService: LoadingService) { }
+  constructor(public dialog: MatDialog, public excelService: ExcelService, 
+    private loadingService: LoadingService) {
+     
+     }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatPaginator) dataSource;
@@ -37,7 +40,7 @@ export class AdminTableTemplateComponent implements AfterViewInit {
   filterObj = {};
 
   uploadDataDialogRef: MatDialogRef<ExcelUploadDialogComponent>;
-  
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue;
     this.filteredDataSource = Object.assign([], this.dataSource.filteredData);
@@ -49,7 +52,6 @@ export class AdminTableTemplateComponent implements AfterViewInit {
 
   ngOnInit() {
     this.dataSourceInit();
-
     this.displayedColumnsWithActions = Object.assign([], this.displayedColumns);
     this.displayedColumnsWithActions.push("actions");
 
@@ -59,7 +61,6 @@ export class AdminTableTemplateComponent implements AfterViewInit {
       formDataObj[this.displayedColumns[i]] = new FormControl();
     }
     this.filter_form = new FormGroup(formDataObj);
-
   }
 
   eventCheck(event: KeyboardEvent, column) {
@@ -78,10 +79,7 @@ export class AdminTableTemplateComponent implements AfterViewInit {
         console.log(this.filterObj);
         this.dataSource.filterPredicate = (data, filter) => {
           if (data[this.filterObj['key']] && this.filterObj['key']) {
-            if (Number.parseInt(data[this.filterObj['key']]) == NaN) {
-              return data[this.filterObj['key']].toLowerCase().includes(this.filterObj['value']);
-            }
-            return data[this.filterObj['key']] == this.filterObj['value'];
+            return String(data[this.filterObj['key']]).toLowerCase().includes(String(this.filterObj['value'].toLowerCase()));
           }
           return false;
         }
@@ -152,22 +150,22 @@ export class AdminTableTemplateComponent implements AfterViewInit {
         setTimeout(() => {
           this.loadingService.hide();
           this.onUploadedData.emit(true);
-        },5000);
+        }, 5000);
         // if (data) {
         // this.TABLE_DATA.push(data as AdminTableData);
         // }
       });
-      // this.uploadDataDialogRef.componentInstance.onSuccessfullUpload.subscribe(data => {
-      //   this.loadingService.show("Loading Uploaded Data ...");
-      //   if(data) {
-      //   this.onUploadedData.emit(true);
-      //   }
-      //   setTimeout(() => {
-      //     this.loadingService.hide();
-      //   },2000);
-      //   // if (data) {
-      //   // this.TABLE_DATA.push(data as AdminTableData);
-      //   // }
-      // });
+    // this.uploadDataDialogRef.componentInstance.onSuccessfullUpload.subscribe(data => {
+    //   this.loadingService.show("Loading Uploaded Data ...");
+    //   if(data) {
+    //   this.onUploadedData.emit(true);
+    //   }
+    //   setTimeout(() => {
+    //     this.loadingService.hide();
+    //   },2000);
+    //   // if (data) {
+    //   // this.TABLE_DATA.push(data as AdminTableData);
+    //   // }
+    // });
   }
 }

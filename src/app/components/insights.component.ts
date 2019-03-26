@@ -45,15 +45,14 @@ export class InsightsComponent implements OnInit {
 
   insight_list: string[] = [
     "Events",
-    "Project",
-    "Benificiary",
-    "Category"
+    "Project"
   ];
 
+  userData = {};
   constructor(private httpService: HttpService, private loadingService: LoadingService, private router: Router) { }
 
   ngOnInit() {
-
+    this.userData = JSON.parse(sessionStorage.getItem("userData"));
   }
 
   getDynamicColor() {
@@ -106,30 +105,33 @@ export class InsightsComponent implements OnInit {
   }
 
   submit() {
+    console.log("Insights request submitted ...");
     this.chartDefArray = [];
-    if (this.insights_form.valid && this.insights_form.controls.insight_level.value
+    if (this.insights_form.controls.insight_level.value
       && this.insights_form.controls.from_date.value && this.insights_form.controls.to_date.value
       && this.insights_form.controls.to_date.value >= this.insights_form.controls.from_date.value) {
       this.postRequestData['Insights Level'] = this.insights_form.controls.insight_level.value;
       this.postRequestData['From Date'] = this.insights_form.controls.from_date.value.format("YYYY-MM-DD");
       this.postRequestData['To Date'] = this.insights_form.controls.to_date.value.format("YYYY-MM-DD");
+      this.postRequestData['Employee Id'] = this.userData['Employee Id'];
       console.log("Insight Request: " + this.postRequestData);
+      this.loadingService.show("Retrieving Insight data ...");
       this.httpService.postData(this.dataUrl, JSON.stringify(this.postRequestData)).subscribe(responseData => {
-        this.loadingService.show("Retrieving Insight data ...");
-        // setTimeout(() => { this.loadingService.hide(); }, 1000);
         console.log(responseData);
         if (responseData && responseData.status_code == 200) {
           this.getChartData(responseData.result.chartData);
+        } else if(responseData && responseData.status_code == 400){
+          this.loadingService.setErrorMessage("Error in retrieving Insights data, Please try again later !!!");
+          this.router.navigate(['/error']);
         }
         this.loadingService.hide();
       }, error => {
         console.log(error);
         this.loadingService.hide();
-        this.loadingService.setErrorMessage("Error retrieving Insight Data !!!");
+        this.loadingService.setErrorMessage("Insight Service is down, Please try again later !!!");
         this.router.navigate(['/error']);
       });
-    }
-    else {
+    } else {
       for (let i in this.insights_form.controls) {
         if (this.insights_form.controls[i].value == null) {
           this.insights_form.controls[i].setErrors({ required: true });

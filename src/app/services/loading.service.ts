@@ -10,6 +10,7 @@ export class LoadingService {
   private loadingMessage = new Subject<any>();
   private errorMessage: string;
   private successMessage: string;
+  private curdOperationStatus = new Subject<any>();
   
   constructor(private spinner: NgxSpinnerService) { }
 
@@ -28,6 +29,18 @@ export class LoadingService {
 
   getLoadingMessage(): Observable<any> {
     return this.loadingMessage.asObservable();
+  }
+
+  setCurdOperationStatus(message: string) {
+    this.curdOperationStatus.next({ text: message });
+  }
+
+  clearCurdOperationStatus() {
+    this.curdOperationStatus.next();
+  }
+
+  getCurdOperationStatus(): Observable<any> {
+    return this.curdOperationStatus.asObservable();
   }
 
   setErrorMessage(message: string) {

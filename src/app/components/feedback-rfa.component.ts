@@ -28,10 +28,24 @@ export class FeedbackRfaComponent implements OnInit {
   constructor(private feedbackService: FeedbackService, private httpService: HttpService, private router: Router, private loadingService: LoadingService) { }
 
   ngOnInit() {
+      this.reason_list = [
+        'Unexpected Family commitment',
+        'Unexpected official work',
+        'Event was not what I expected',
+        'Didnot recieve further information about event',
+        'Incorrectly registered',
+        'Donot wish to disclose'
+      ];
+      this.feedback_rfa_form.controls.employee_id.setValue("<EMPLOYEE ID>");
+      this.displayMessage = "Please share your Feedback for the Outreach event \""
+      + "<EVENT NAME>" +"\" that you missed to attend on " + "<EVENT DATE>" + "\"";
+     
     this.feedback_rfa_form.controls.employee_id.disable();
-    this.feedback_rfa_form.controls.employee_id.setValue(this.feedbackService.employee_id);
-    this.reason_list = this.feedbackService.feedback_option;
-    this.displayMessage = this.feedbackService.display_message;
+    if (this.feedbackService.display_message) {
+      this.feedback_rfa_form.controls.employee_id.setValue(this.feedbackService.employee_id);
+      this.reason_list = this.feedbackService.feedback_option;
+      this.displayMessage = this.feedbackService.display_message;
+    }
   }
 
   submitFeedback() {
@@ -55,12 +69,12 @@ export class FeedbackRfaComponent implements OnInit {
           this.loadingService.setSuccessMessage(responseData.result['Display Message']);
           this.router.navigate(['/success']);
         } else if(responseData && responseData.status_code == 400){
-          this.loadingService.setErrorMessage("Error saving your Feedback, please try again later !!!");
+          this.loadingService.setErrorMessage("Error in saving your Feedback, Please try again later !!!");
           this.router.navigate(['/error']);
         }
       }, error => {
         console.log(error);
-        this.loadingService.setErrorMessage("Service is down, please try again later !!!");
+        this.loadingService.setErrorMessage("Service is down, Please try again later !!!");
         this.router.navigate(['/error']);
       });
     }

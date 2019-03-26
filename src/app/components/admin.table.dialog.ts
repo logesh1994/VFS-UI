@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { HttpService } from '../services/http-service';
 import { AdminTablePostData } from '../models/AdminTablePostData';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-admin-table-dialog',
@@ -29,7 +30,7 @@ export class AdminTableDialogComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<AdminTableDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private httpService: HttpService) {
+    @Inject(MAT_DIALOG_DATA) public data: any, private httpService: HttpService, private loadinService: LoadingService) {
     this.tableName = data.tableName;
     this.displayedColumns = data.displayedColumns;
     this.action = data.action;
@@ -106,6 +107,7 @@ export class AdminTableDialogComponent implements OnInit {
         this.httpService.postData(this.dataUrl, JSON.stringify(this.postData)).subscribe(responseData => {
           this.post_response = JSON.stringify(responseData, undefined, 2)
           console.log(this.post_response);
+          this.loadinService.setCurdOperationStatus("Completed");
           this.dialogRef.close();
         }, error => {
           console.log(error);

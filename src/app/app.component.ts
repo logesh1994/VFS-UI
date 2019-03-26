@@ -18,20 +18,19 @@ export class AppComponent implements OnInit {
   ADMIN_ROUTES = [
     { navLabel: "Home", route: "/home" },
     { navLabel: "Feedback RPA Template", route: "/feedback-RPA" },
-    { navLabel: "Feedback RFA Template", route: "/feedback-RFA" },
-    { navLabel: "Feedback UR Template", route: "/feedback-UR" },
+    { navLabel: "Feedback RFA & UR Template", route: "/feedback-RFA" },
     { navLabel: "Insights", route: "/insights" },
     { navLabel: "Admin Tables", route: "/admin-tables" },
     { navLabel: "Event Data", route: "/event-data" },
-    { navLabel: "Post Man", route: "/postman" },
-    { navLabel: "Contact", route: "/contact" }
+    { navLabel: "Post Man", route: "/postman" }
   ]
 
-  VOLUNTEER_ROUTES = [
+  POC_ROUTES = [
     { navLabel: "Home", route: "/home" },
     { navLabel: "Feedback RPA Template", route: "/feedback-RPA" },
-    { navLabel: "Feedback RFA Template", route: "/feedback-RFA" },
-    { navLabel: "Feedback UR Template", route: "/feedback-UR" },
+    { navLabel: "Feedback RFA & UR Template", route: "/feedback-RFA" },
+    { navLabel: "Insights", route: "/insights" },
+    { navLabel: "Event Data", route: "/event-data" },
   ]
 
   FEEDBACK_ROUTES = ["/feedback-RPA", "/feedback-RFA", "/feedback-UR"];
@@ -106,8 +105,7 @@ export class AppComponent implements OnInit {
             break;
           }
           case 'POC': {
-            //TODO Data when the assosiate is POC
-            this.sideNavRoutes = this.VOLUNTEER_ROUTES;
+            this.sideNavRoutes = this.POC_ROUTES;
             break;
           }
           case 'Volunteer': {
@@ -118,7 +116,9 @@ export class AppComponent implements OnInit {
             break;
           }
         }
-        this.router.navigate(['/home']);
+        if (this.currentRoute.includes("error" || "loading" || "success")) {
+          this.router.navigate(['/home']);
+        }
       }
     } else {
       console.log(this.currentRoute);

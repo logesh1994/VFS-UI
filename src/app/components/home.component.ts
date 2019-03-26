@@ -53,10 +53,14 @@ export class HomeComponent implements OnInit {
           this.eventData = responseData.result;
           this.setData();
           this.loadingService.hide();
+        } else if (responseData && responseData.status_code == 400) {
+          this.loadingService.setErrorMessage("Error in retrieving Event data, Please try again later !!!");
+          this.router.navigate(['/error']);
+          this.loadingService.hide();
         }
       }, error => {
         console.log(error);
-        this.loadingService.setErrorMessage('Error in retrieving data ...');
+        this.loadingService.setErrorMessage('Service is down, please try again later ...');
         this.router.navigate(['/error']);
         this.loadingService.hide();
       });
@@ -98,7 +102,7 @@ export class HomeComponent implements OnInit {
         }
       }
     });
-     
+
   }
 
   resetForm() {
@@ -152,9 +156,12 @@ export class HomeComponent implements OnInit {
         console.log(responseData.result);
         this.status_Message = "Email Batch Triggered Successfully";
         this.loadingService.hide();
+      } else if(responseData.status_code == 400) {
+        this.error_Message = "Error triggering the batch, please try again later...";
+        this.loadingService.hide();
       }
     }, error => {
-      this.error_Message = "Error triggering the batch, please try again later";
+      this.error_Message = "Error triggering the batch, please try again later...";
       this.loadingService.hide();
       console.log(error);
     });

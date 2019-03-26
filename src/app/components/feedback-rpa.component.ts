@@ -35,10 +35,16 @@ export class FeedbackRpaComponent implements OnInit {
   constructor(private feedbackService: FeedbackService, private httpService: HttpService, private router: Router, private loadingService: LoadingService) { }
 
   ngOnInit() {
+      this.feedback_rpa_form.controls.employee_id.setValue("<EMPLOYEE ID>");
+      this.displayMessage = "Please share your Feedback for the Outreach event \""
+      + "<EVENT NAME>" +"\" that you Attend on " + "<EVENT DATE>" + "\"";  
+
     this.feedback_rpa_form.controls.rating.disable();
     this.feedback_rpa_form.controls.employee_id.disable();
-    this.feedback_rpa_form.controls.employee_id.setValue(this.feedbackService.employee_id);
+    if (this.feedbackService.display_message) {
+      this.feedback_rpa_form.controls.employee_id.setValue(this.feedbackService.employee_id);
     this.displayMessage = this.feedbackService.display_message;
+    }
   }
 
   onClick(selectedRating: string) {
@@ -54,7 +60,8 @@ export class FeedbackRpaComponent implements OnInit {
     if (this.feedback_rpa_form.controls.employee_id.value == null || this.feedback_rpa_form.controls.employee_id.value == "") {
       this.feedback_rpa_form.controls.employee_id.setErrors({ required: true });
     }
-    if (this.feedback_rpa_form) {
+    if (this.feedback_rpa_form.valid &&
+      !(this.feedback_rpa_form.controls.rating.value == null) && !(this.feedback_rpa_form.controls.rating.value == "")) {
       console.log("Is feedback Form valid : " + this.feedback_rpa_form.valid)
 
       this.postRequestData['Event Detail Id'] = this.feedbackService.event_detail_id;
@@ -70,10 +77,13 @@ export class FeedbackRpaComponent implements OnInit {
         if (responseData && responseData.status_code == 200) {
           this.loadingService.setSuccessMessage(responseData.result['Display Message']);
           this.router.navigate(['/success']);
+        } else if(responseData && responseData.status_code == 400) {
+        this.loadingService.setErrorMessage("Error in saving your Feedback, Please try again later !!!");
+        this.router.navigate(['/error']);
         }
       }, error => {
         console.log(error);
-        this.loadingService.setErrorMessage("Error saving your Feedback !!!");
+        this.loadingService.setErrorMessage("Service is down, Please try again later !!!");
         this.router.navigate(['/error']);
       });
     }
