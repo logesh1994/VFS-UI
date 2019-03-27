@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
 
   postRequestData: Object = {};
 
-  dataUrl: string = "http://localhost:8083/vfs/api/v1/feedback/getFeedbackTemplate";
+  dataUrl: string = "http://localhost:8762/vfs/feedback/getFeedbackTemplate";
 
   constructor(private router: Router,
     private loadingService: LoadingService,

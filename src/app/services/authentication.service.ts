@@ -12,7 +12,7 @@ import { LoadingService } from './loading.service';
 export class AuthenticationService {
 
   private userData = new Subject<UserData>();
-  dataUrl: string = "http://localhost:8081/vfs/api/v1/login/authenticate";
+  dataUrl: string = "http://localhost:8762/vfs/login/authenticate";
 
   postRequestData: any ={};
   error = {};

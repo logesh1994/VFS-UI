@@ -26,8 +26,8 @@ export class AdminTableDialogComponent implements OnInit {
   postData: AdminTablePostData;
   post_response: any;
 
-  dataUrl: string = "http://localhost:8082/vfs/api/v1/admin/updateAdminData";
-
+ // dataUrl: string = "http://localhost:8082/vfs/api/v1/admin/updateAdminData";
+    dataUrl: string = "http://localhost:8762/vfs/admin/updateAdminData";
   constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<AdminTableDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private httpService: HttpService, private loadinService: LoadingService) {
@@ -96,6 +96,7 @@ export class AdminTableDialogComponent implements OnInit {
         this.httpService.postData(this.dataUrl, JSON.stringify(this.postData)).subscribe(responseData => {
           this.post_response = JSON.stringify(responseData, undefined, 2)
           console.log(this.post_response);
+          this.loadinService.setCurdOperationStatus("Completed");
           this.dialogRef.close();
         }, error => {
           console.log(error);
@@ -115,13 +116,13 @@ export class AdminTableDialogComponent implements OnInit {
         break;
       }
       case 'delete': {
+        //TODO Delete functionality
         break;
       }
       default: {
         console.log("switch case default");
         break;
       }
-        this.dialogRef.close();
     }
   }
   disableSave() {

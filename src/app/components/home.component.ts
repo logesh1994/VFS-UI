@@ -22,8 +22,8 @@ export class HomeComponent implements OnInit {
 
   }
 
-  event_data_lookup_url: string = "http://localhost:8082/vfs/api/v1/admin/getEventDataList";
-  trigger_Email_batch_url: string = "http://localhost:8082/vfs/api/v1/admin/triggerEmailBatch/";
+  event_data_lookup_url: string = "http://localhost:8762/vfs/admin/getEventDataList";
+  trigger_Email_batch_url: string = "http://localhost:8762/vfs/admin/triggerEmailBatch/";
 
   event_data_form = new FormGroup({
     event_id: new FormControl('', [Validators.required]),

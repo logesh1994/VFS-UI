@@ -14,7 +14,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class EventDataComponent implements OnInit {
   // dataUrl: string = "assets/test-data/event-data.json";
-  dataUrl: string = "http://localhost:8082/vfs/api/v1/admin/getEventDetailsData/";
+  dataUrl: string = "http://localhost:8762/vfs/admin/getEventDetailsData/";
   TABLE_DATA: AdminTableData[] = [];
   adminTable: AdminTableData = new AdminTableData();
 
