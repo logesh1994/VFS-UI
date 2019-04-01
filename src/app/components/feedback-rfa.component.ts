@@ -22,7 +22,7 @@ export class FeedbackRfaComponent implements OnInit {
   displayMessage: string;
   reason_list: string[] = [];
 
-  dataUrl: string = "http://localhost:8762/vfs/feedback/saveFeedback";
+  dataUrl: string = "http://172.18.2.50:10201/vfs/feedback/saveFeedback";
   postRequestData: Object = {};
 
   constructor(private feedbackService: FeedbackService, private httpService: HttpService, private router: Router, private loadingService: LoadingService) { }

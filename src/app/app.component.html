@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <header>
   <ng-container>
     <a routerLink="/home">
@@ -8,7 +9,7 @@
     <ng-container *ngIf="validUser()">
       <!-- <a (click)="logout()" class="logout">Logout</a> -->
       <a (click)="navToggle()">
-        <mat-icon class="menu-icon">{{toggleMenu ? 'menu_black' : 'close'}}</mat-icon>
+        <mat-icon class="menu-icon">{{toggleMenu ? 'menu' : 'close'}}</mat-icon>
       </a>
     </ng-container>
   </ng-container>

@@ -19,7 +19,7 @@ export class AdminTablesComponent implements OnInit, OnDestroy {
   // dataUrl: string = "assets/test-data/admin-table-data.json";
   //dataUrl: string = "assets/test-data/Actual-Admin-Data-Response.json";
   //dataUrl: string = "http://localhost:8082/vfs/api/v1/admin/getAdminData";
-  dataUrl: string = "http://localhost:8762/vfs/admin/getAdminData";
+  dataUrl: string = "http://172.18.2.50:10201/vfs/admin/getAdminData";
   TABLE_DATA: AdminTableData[] = [];
   adminTable: AdminTableData = new AdminTableData();
   isAdminUser: boolean;

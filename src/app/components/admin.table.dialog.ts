@@ -27,7 +27,7 @@ export class AdminTableDialogComponent implements OnInit {
   post_response: any;
 
  // dataUrl: string = "http://localhost:8082/vfs/api/v1/admin/updateAdminData";
-    dataUrl: string = "http://localhost:8762/vfs/admin/updateAdminData";
+    dataUrl: string = "http://172.18.2.50:10201/vfs/admin/updateAdminData";
   constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<AdminTableDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private httpService: HttpService, private loadinService: LoadingService) {

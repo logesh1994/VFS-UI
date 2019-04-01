@@ -31,7 +31,7 @@ export class ExcelUploadDialogComponent implements OnInit {
 
   //onSuccessfullUpload = new EventEmitter<boolean>();
 
-  dataUrl: string = "http://localhost:8762/vfs/admin/updateAdminData";
+  dataUrl: string = "http://172.18.2.50:10201/vfs/admin/updateAdminData";
 
 
   constructor(public dialogRef: MatDialogRef<ExcelUploadDialogComponent>, private httpService: HttpService, private loadingService: LoadingService) { }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ui-module": {
+    "outreach-vfs-ui": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ui-module",
+            "outputPath": "dist/outreach-vfs-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -58,18 +58,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ui-module:build"
+            "browserTarget": "outreach-vfs-ui:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ui-module:build:production"
+              "browserTarget": "outreach-vfs-ui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ui-module:build"
+            "browserTarget": "outreach-vfs-ui:build"
           }
         },
         "test": {
@@ -103,7 +103,7 @@
         }
       }
     },
-    "ui-module-e2e": {
+    "outreach-vfs-ui-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -112,11 +112,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ui-module:serve"
+            "devServerTarget": "outreach-vfs-ui:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ui-module:serve:production"
+              "devServerTarget": "outreach-vfs-ui:serve:production"
             }
           }
         },
@@ -132,5 +132,5 @@
       }
     }
   },
-  "defaultProject": "ui-module"
+  "defaultProject": "outreach-vfs-ui"
 }

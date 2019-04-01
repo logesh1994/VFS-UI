@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ui-module'`, () => {
+  it(`should have as title 'outreach-vfs-ui'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ui-module');
+    expect(app.title).toEqual('outreach-vfs-ui');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to ui-module!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to outreach-vfs-ui!');
   });
 });

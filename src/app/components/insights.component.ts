@@ -33,7 +33,7 @@ export class InsightsComponent implements OnInit {
   today = new Date();
   chartDefArray: ChartDefinition[] = [];
   // dataUrl: string = "assets/test-data/insights-response-1.json";
-  dataUrl: string = "http://localhost:8762/vfs/admin/getInsights";
+  dataUrl: string = "http://172.18.2.50:10201/vfs/admin/getInsights";
   postRequestData: Object = {};
 
   insights_form = new FormGroup({
