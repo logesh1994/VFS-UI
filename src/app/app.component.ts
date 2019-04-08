@@ -21,8 +21,7 @@ export class AppComponent implements OnInit {
     { navLabel: "Feedback RFA & UR Template", route: "/feedback-RFA" },
     { navLabel: "Insights", route: "/insights" },
     { navLabel: "Admin Tables", route: "/admin-tables" },
-    { navLabel: "Event Data", route: "/event-data" },
-    { navLabel: "Post Man", route: "/postman" }
+    { navLabel: "Event Data", route: "/event-data" }
   ]
 
   POC_ROUTES = [

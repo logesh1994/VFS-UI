@@ -24,6 +24,14 @@ export class EventDataComponent implements OnInit {
   ngOnInit() {
     this.loadingService.show("Loading Event & Feedback Data ...");
     this.getTableData(["Admin","POC"]);
+
+    this.loadingService.getCurdOperationStatus().subscribe(message => {
+      console.log(message['text']);
+      if(message['text'] == "Completed") {
+        this.TABLE_DATA =[];
+        this.ngOnInit();
+      }
+    });
   }
 
   openSnackBar(event: MatTabChangeEvent) {
